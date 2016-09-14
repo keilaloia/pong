@@ -1,29 +1,27 @@
-#include "sfwdraw.h"
+
 #include "paddle.h"
 #include "GameState.h"
-#include"Ball.h"
+#include "Ball.h"
+#include "sfwdraw.h"
+#include "Enums.h"
+#include "Option.h"
 #include <time.h>
 #include <random>
 #include <iostream>
 
 void GameState::init()
 {
-	if (playGame == false)
-	{
 
-		sfw::drawString(f, "To play a game press A", 300, 400, 20, 20, 6, ' ');
-		if (sfw::getKey('A'))
-		{
-			playGame = true;
 
 			b1.x = 400;
-			p1 = paddle(100, 45, 20, 50, 'W', 'S', WHITE),
-			p2 = paddle(700, 45, 20, 50, KEY_UP, KEY_DOWN, WHITE);
+			p1.paddle(100, 45, 20, 50, 'W', 'S', WHITE),
+			p2.paddle(700, 45, 20, 50, KEY_UP, KEY_DOWN, WHITE);
 			b1.circle(300, 350, 5, 5, 20, CYAN);
+			p1.score = 0;
+			p2.score = 0;
+			gameover = false;
 
-		}
 
-	}
 }
 
 void GameState::update()
@@ -37,21 +35,6 @@ void GameState::update()
 	heightClamp(p1);
 	heightClamp(p2);
 
-		
-
-
-/*
-			ballClamp(gs.b1);
-
-			prettyball(gs.b1);
-			heightClamp(gs.p1);
-			heightClamp(gs.p2);
-			pMovement(gs.p1);
-			pMovement2(gs.p2);
-			collision(gs.p1, gs.b1);
-			collision(gs.p2, gs.b1);*/
-			
-	
 }
 
 void GameState::drawRound()
@@ -63,35 +46,30 @@ void GameState::drawRound()
 
 void GameState::Gscore()
 {
-	if (playGame == true)
+	if (b1.x < p1.x - 10)
 	{
-
-		if (b1.x < p1.x - 10)
-		{
-			p1.score += 1;
+		p1.score += 1;
 
 
 
-			b1.x = 400;
+		b1.x = 400;
 
 
-			printf("player 1: %d player 2: %d\n", p1.score, p2.score);
+		printf("player 1: %d player 2: %d\n", p1.score, p2.score);
 
-		}
-		else if (b1.x > p2.x + 10)
-		{
-			p2.score += 1;
-			b1.x = 400;
+	}
+	else if (b1.x > p2.x + 10)
+	{
+		p2.score += 1;
+		b1.x = 400;
 
-			printf("player 1: %d player 2: %d\n", p1.score, p2.score);
+		printf("player 1: %d player 2: %d\n", p1.score, p2.score);
 
-		}
+	}
 
-		if ((p1.score == 3) || (p2.score == 3))
-		{
-			playGame = false;
-
-		}
+	if ((p1.score == 3) || (p2.score == 3))
+	{
+		gameover = true;
 	}
 
 }
@@ -106,4 +84,13 @@ void collision(Player &p, Ball &b1)
 
 		//ball.speedy = 16 - rand()%8; // speed y will be between -8 and 8
 	}
+}
+
+
+APP_STATE GameState::next()
+{
+	if (gameover)
+		return ENTER_OPTIONS;
+	else
+		return GAME;
 }

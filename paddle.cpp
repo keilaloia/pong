@@ -4,18 +4,18 @@
 
 
 
-Player paddle(float x, float y, float width, float height, char up, char down, unsigned int color)
+void Player::paddle(float b_x, float b_y, float b_width, float b_height,
+	char b_up, char b_down, unsigned int b_color)
 {
-	Player p;
-	p.x = x;
-	p.y = y;
-	p.width = width;
-	p.height = height;
-	p.up = up;
-	p.down = down;
-	p.color = color;
+	
+	x = b_x;
+	y = b_y;
+	width = b_width;
+	height = b_height;
+	up = b_up;
+	down = b_down;
+	color = b_color;
 
-	return p;
 }
 
 

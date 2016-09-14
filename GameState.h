@@ -3,6 +3,7 @@
 #include "paddle.h"
 #include "Ball.h"
 #include "sfwdraw.h"
+#include "Enums.h"
 #include <time.h>
 #include <iostream>
 #include <random>
@@ -16,11 +17,13 @@ public:
 	unsigned f = sfw::loadTextureMap("./res/tonc_font.png", 16, 6);
 	unsigned d = sfw::loadTextureMap("./res/fontmap.png", 16, 16);
 
-	bool playGame = false;
+	bool gameover = false;
+
 	void init();
 	void update();
 	void Gscore();
 	void drawRound();
+	APP_STATE next();
 
 	
 };

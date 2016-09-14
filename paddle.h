@@ -1,17 +1,18 @@
 #pragma once
 
 
-struct Player
+class Player
 {
+public:
 	float x = 0, y = 0, width = 0, height = 0;
 	char up = 0, down = 0;
 	unsigned int color = 0;
 	int score = 0;
+	void paddle(float x, float y, float width, float height, char up, char down, unsigned int color);
 
 };
 
 
-Player paddle(float x, float y, float width, float height, char up, char down, unsigned int color);
 
 
 
