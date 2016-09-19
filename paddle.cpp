@@ -20,18 +20,7 @@ void Player::paddle(float b_x, float b_y, float b_width, float b_height,
 
 
 
-void pMovement2(Player &p)
-{
 
-	if (sfw::getKey(KEY_DOWN))
-	{
-		p.y -= (sfw::getDeltaTime() * 600);
-	}
-	else if (sfw::getKey(KEY_UP))
-	{
-		p.y += (sfw::getDeltaTime() * 600);
-	}
-}
 void pMovement(Player &p)
 {
 	if (sfw::getKey('W'))
@@ -45,6 +34,18 @@ void pMovement(Player &p)
 	}
 
 }
+void pMovement2(Player &p)
+{
+
+	if (sfw::getKey(KEY_DOWN))
+	{
+		p.y -= (sfw::getDeltaTime() * 600);
+	}
+	else if (sfw::getKey(KEY_UP))
+	{
+		p.y += (sfw::getDeltaTime() * 600);
+	}
+}
 
 
 
@@ -57,7 +58,7 @@ void heightClamp(Player &p)
 
 
 //draw box paddles
-void Draw(const Player& p)
+void Draw(const Player &p)
 {
 	sfw::drawLine(p.x, p.y, p.x, p.y + p.height, p.color);
 	sfw::drawLine(p.x + p.width, p.y, p.x + p.width, p.y + p.height, p.color);
@@ -67,3 +68,4 @@ void Draw(const Player& p)
 
 
 }
+

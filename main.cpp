@@ -12,9 +12,9 @@ using namespace sfw;
 
 void main()
 {
-	sfw::initContext(800,600, "NSFW Draw");
+	sfw::initContext(800, 600, "NSFW Draw");
 	unsigned font = sfw::loadTextureMap("./res/fontmap.png", 16, 16);
-
+	unsigned r = sfw::loadTextureMap("./res/background.jpg");
 	GameState gs;
 	Splash splash;
 	Option option;
@@ -23,7 +23,7 @@ void main()
 	splash.init(font);
 	option.init(font);
 
-	//ol quit = false;
+	
 
 	APP_STATE state = ENTER_OPTIONS;
 
@@ -45,6 +45,7 @@ void main()
 			gs.init();
 
 		case GAME:
+			sfw::drawTexture(r, 0, 600, 800, 600, 0, false, 0, GREEN);
 			gs.drawRound();
 			gs.update();
 			

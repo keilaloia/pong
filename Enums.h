@@ -10,3 +10,10 @@ enum APP_STATE
 	ENTER_GAME,
 	GAME
 };
+
+enum Power
+{
+	multi,
+	speed,
+	size
+};

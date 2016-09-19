@@ -138,6 +138,7 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="Option.h" />
     <ClInclude Include="paddle.h" />
+    <ClInclude Include="Power.h" />
     <ClInclude Include="Splash.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

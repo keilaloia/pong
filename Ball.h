@@ -15,6 +15,6 @@ void circle(float x, float y, float speedx, float speedy, float radius, unsigned
 
 //draws a prettyball
 void prettyball(const Ball &ball);
-//void prettyball(Ball &ball);
+
 //keeps ball between the barriers of the screen, ie:clamping
 void ballClamp(Ball &ball);

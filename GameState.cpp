@@ -8,15 +8,17 @@
 #include <time.h>
 #include <random>
 #include <iostream>
+char buffer[64] = { 0 };
+
 
 void GameState::init()
 {
-
-
+			
+			timer = 10.f;
 			b1.x = 400;
-			p1.paddle(100, 45, 20, 50, 'W', 'S', WHITE),
-			p2.paddle(700, 45, 20, 50, KEY_UP, KEY_DOWN, WHITE);
-			b1.circle(300, 350, 5, 5, 20, CYAN);
+			p1.paddle(100, 45, 20, 50, 'W', 'S', MAGENTA),
+			p2.paddle(700, 45, 20, 50, KEY_UP, KEY_DOWN, MAGENTA);
+			b1.circle(300, 350, 5, 5, 20, RED);
 			p1.score = 0;
 			p2.score = 0;
 			gameover = false;
@@ -26,11 +28,25 @@ void GameState::init()
 
 void GameState::update()
 {
-	
+	//timer
+	timer -= sfw::getDeltaTime();
+
+	sprintf_s(buffer, "Ability In");
+	sfw::drawString(d, buffer, 325, 575, 17, 17);
+	sprintf_s(buffer, "%f", timer);
+	sfw::drawString(d, buffer, 325, 550, 17, 17);
+	if (timer < 0)
+	{
+		timer = 10.f;
+		// flip stuff here!
+	}
+
+
 	pMovement(p1);
 	pMovement2(p2);
 	collision(p1, b1);
 	collision(p2, b1);
+	
 	ballClamp(b1);
 	heightClamp(p1);
 	heightClamp(p2);
@@ -41,33 +57,37 @@ void GameState::drawRound()
 {
 	Draw(p1);
 	Draw(p2);
+	
 	prettyball(b1);
 }
 
 void GameState::Gscore()
 {
-	if (b1.x < p1.x - 10)
+	
+	
+	
+	sprintf_s(buffer, "player 1: %d", p1.score);
+	sfw::drawString(d, buffer, 75, 600, 17, 17);
+
+	sprintf_s(buffer, "player 2: %d", p2.score);
+	sfw::drawString(d, buffer, 525, 600, 17, 17);
+
+	if (b1.x < p1.x - 50)
 	{
-		p1.score += 1;
 
-
-
+		p1.score ++;
 		b1.x = 400;
 
-
-		printf("player 1: %d player 2: %d\n", p1.score, p2.score);
-
 	}
-	else if (b1.x > p2.x + 10)
+	else if (b1.x > p2.x + 50)
 	{
-		p2.score += 1;
+
+		p2.score ++;
 		b1.x = 400;
 
-		printf("player 1: %d player 2: %d\n", p1.score, p2.score);
-
 	}
 
-	if ((p1.score == 3) || (p2.score == 3))
+	if ((p1.score == 5) || (p2.score == 5))
 	{
 		gameover = true;
 	}
@@ -82,9 +102,10 @@ void collision(Player &p, Ball &b1)
 	{
 		b1.speedx *= -1;
 
-		//ball.speedy = 16 - rand()%8; // speed y will be between -8 and 8
+		
 	}
 }
+
 
 
 APP_STATE GameState::next()
