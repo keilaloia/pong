@@ -9,7 +9,7 @@ public:
 	unsigned int color = 0;
 	int score = 0;
 	void paddle(float x, float y, float width, float height, char up, char down, unsigned int color);
-
+	
 };
 
 

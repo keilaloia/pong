@@ -15,6 +15,7 @@ void Player::paddle(float b_x, float b_y, float b_width, float b_height,
 	up = b_up;
 	down = b_down;
 	color = b_color;
+	
 
 }
 

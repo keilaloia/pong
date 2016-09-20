@@ -16,7 +16,7 @@ void main()
 	sfw::initContext(800, 600, "NSFW Draw");
 	unsigned font = sfw::loadTextureMap("./res/fontmap.png", 16, 16);
 	unsigned r = sfw::loadTextureMap("./res/background.jpg"); 
-	Player betterplayer;
+	Player score;
 	GameState gs;
 	Splash splash;
 	Option option;
@@ -24,7 +24,7 @@ void main()
 
 	splash.init(font);
 	option.init(font);
-	victory.init(font,betterplayer);
+	victory.init(font);
 	
 
 	APP_STATE state = ENTER_OPTIONS;
@@ -64,15 +64,19 @@ void main()
 			state = splash.next();
 			break;
 		case ENTER_VICTORY:
-			victory.play();
+			victory.play(gs.p1.score, gs.p2.score);
+			
 		case VICTORY:
+			gs.drawRound();
+			gs.update();
+
 			victory.draw();
+			victory.step();
 			state = victory.next();
 			break;
 
 		case TERMINATE: quit = true;
 		}
-		//getchar();
 	}
 
 	sfw::termContext();

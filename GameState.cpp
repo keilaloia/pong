@@ -1,4 +1,4 @@
-
+#include "Victory.h"
 #include "paddle.h"
 #include "GameState.h"
 #include "Ball.h"
@@ -11,26 +11,22 @@
 char buffer[64] = { 0 };
 
 
+
 void GameState::init()
 {
-
 	timer = 10.f;
 	b1.x = 400;
 	p1.paddle(100, 45, 20, 50, 'W', 'S', MAGENTA),
-		p2.paddle(700, 45, 20, 50, KEY_UP, KEY_DOWN, MAGENTA);
+	p2.paddle(700, 45, 20, 50, KEY_UP, KEY_DOWN, MAGENTA);
 
-	//b1.circle(300, 350, 5, 5, 20, RED);
-	//b2.circle(300, 350, 5, 5, 20, RED);
-	//b3.circle(300, 300, 5, 5, 20, RED);
 
 	for (int i = 0; i < 10; ++i)
-		balls[i].circle(300, 300, 5, 5, 20, RED);
+			balls[0].circle(300, 300, 5, 5, 20, RED);
 	ballCount = 1;
 
 	p1.score = 0;
 	p2.score = 0;
-	ballsPlus = false;
-
+	player.score = (p1.score, p2.score);
 	gameover = false;
 
 
@@ -39,22 +35,18 @@ void GameState::init()
 
 void GameState::drawRound()
 {
+	// draws balls in the beginning of the round
 	for (int i = 0; i < ballCount && i < 10; ++i)
+		if (balls[i].Aball)
 	{
 		prettyball(balls[i]);
+	
 	}
 
 	Draw(p1);
 	Draw(p2);
 
-	//prettyball(b1);
 
-	//if (ballsPlus == true)
-	//{
-	//	//prettyball(b1);
-	//	prettyball(b2);
-	//	prettyball(b3);
-	//}
 	
 }
 
@@ -63,44 +55,38 @@ void GameState::update()
 	//timer
 	timer -= sfw::getDeltaTime();
 
-	sprintf_s(buffer, "Ability In");
+	sprintf_s(buffer, "Craziness");
 	sfw::drawString(d, buffer, 325, 575, 17, 17);
 	sprintf_s(buffer, "%f", timer);
 	sfw::drawString(d, buffer, 325, 550, 17, 17);
-
+	// draws balls every 10 seconds 
 	if (timer < 0)
 	{
 		timer = 10.f;
-		//ballsPlus = true;
+
 		ballCount++;
-		// flip stuff here!
+		if(ballCount < 10)
+		balls[ballCount - 1].circle(400, balls[ballCount].y, rand() % 7 + 4, 5, rand() % 50 + 1, RED);
+
+		p1.paddle(p1.x, p1.y, rand() % 60 + 1, rand() % 200 + 10, KEY_UP, KEY_DOWN, MAGENTA);
+		p2.paddle(p2.x, p2.y, rand() % 60 + 1, rand() % 200 + 10, KEY_UP, KEY_DOWN, MAGENTA);
 	}
 
+	// collision code for draw balls 
 	for (int i = 0; i < ballCount && i < 10; ++i)
-	{
-		collision(p1, balls[i]);
-		collision(p2, balls[i]);
-		ballClamp(balls[i]);
-	}
+		if(balls[i].Aball)
+		{
+			collision(p1, balls[i]);
+			collision(p2, balls[i]);
+			ballClamp(balls[i]);
+		}
 
-	//if (ballsPlus == true)
-	//{
-	//	collision(p1, b2);
-	//	collision(p2, b2);
-	//	ballClamp(b2);
 
-	//	collision(p1, b3);
-	//	collision(p2, b3);
-	//	ballClamp(b3);
-	//}
-
-	
+	if (!gameover)
+	{	
 	pMovement(p1);
 	pMovement2(p2);
-	//collision(p1, b1);
-	//collision(p2, b1);
-
-	//ballClamp(b1);
+	}
 	heightClamp(p1);
 	heightClamp(p2);
 
@@ -118,24 +104,44 @@ void GameState::Gscore()
 	sfw::drawString(d, buffer, 525, 600, 17, 17);
 
 	for (int i = 0; i < ballCount && i < 10; ++i)
-		if (balls[i].x < p1.x - 50)
+		if(balls[i].Aball)
 		{
-			p1.score ++;
-			balls[i].x = 400;
-		}
-		else if (balls[i].x > p2.x + 50)
-		{
-			p2.score ++;
-			balls[i].x = 400;
-		}
+			if (balls[i].x < p1.x - 50)
+			{
+				p1.score ++;
+				if(i > 0)
+					balls[i].Aball = false;
+				if(i==0)
+				balls[i].x = 400;
 
-	if ((p1.score == 5) || (p2.score == 5))
+			
+			}
+		
+
+			else if (balls[i].x > p2.x + 50)
+			{
+				p2.score ++;
+				if (i > 0)
+					balls[i].Aball = false;
+
+				if(i==0)
+				balls[i].x = 400;
+
+			}
+		}
+	
+
+	if ((p1.score == 20) || (p2.score == 20))
 	{
 		
 		gameover = true;
+		
+		
 	}
-
+	
 }
+
+
 
 void collision(Player &p, Ball &b1)
 {
