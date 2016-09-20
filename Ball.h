@@ -1,8 +1,5 @@
 #pragma once
-//#include "sfwdraw.h"
-//#include "paddle.h"
-//#include "GameState.h"
-//#include <cstdlib>
+
 class Ball
 {
 public:
