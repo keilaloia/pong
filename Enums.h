@@ -8,12 +8,8 @@ enum APP_STATE
 	ENTER_OPTIONS,
 	OPTION,
 	ENTER_GAME,
-	GAME
+	GAME,
+	ENTER_VICTORY,
+	VICTORY
 };
 
-enum Power
-{
-	multi,
-	speed,
-	size
-};

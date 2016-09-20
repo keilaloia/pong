@@ -4,6 +4,7 @@
 #include "Enums.h"
 #include "Splash.h"
 #include "Option.h"
+#include "Victory.h"
 #include "sfwdraw.h"
 #include <random>
 #include <time.h>
@@ -14,15 +15,16 @@ void main()
 {
 	sfw::initContext(800, 600, "NSFW Draw");
 	unsigned font = sfw::loadTextureMap("./res/fontmap.png", 16, 16);
-	unsigned r = sfw::loadTextureMap("./res/background.jpg");
+	unsigned r = sfw::loadTextureMap("./res/background.jpg"); 
+	Player betterplayer;
 	GameState gs;
 	Splash splash;
 	Option option;
-
+	Victory victory;
 
 	splash.init(font);
 	option.init(font);
-
+	victory.init(font,betterplayer);
 	
 
 	APP_STATE state = ENTER_OPTIONS;
@@ -46,11 +48,12 @@ void main()
 
 		case GAME:
 			sfw::drawTexture(r, 0, 600, 800, 600, 0, false, 0, GREEN);
+
 			gs.drawRound();
 			gs.update();
-			
 			gs.Gscore();
 			state = gs.next();
+
 			break;
 
 		case ENTER_SPLASH:
@@ -59,6 +62,12 @@ void main()
 			splash.step();
 			splash.draw();
 			state = splash.next();
+			break;
+		case ENTER_VICTORY:
+			victory.play();
+		case VICTORY:
+			victory.draw();
+			state = victory.next();
 			break;
 
 		case TERMINATE: quit = true;

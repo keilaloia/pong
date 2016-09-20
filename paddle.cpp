@@ -58,7 +58,7 @@ void heightClamp(Player &p)
 
 
 //draw box paddles
-void Draw(const Player &p)
+void Draw(Player &p)
 {
 	sfw::drawLine(p.x, p.y, p.x, p.y + p.height, p.color);
 	sfw::drawLine(p.x + p.width, p.y, p.x + p.width, p.y + p.height, p.color);

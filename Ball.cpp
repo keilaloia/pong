@@ -44,9 +44,9 @@ void Ball::circle(float a_x, float a_y, float a_speedx, float a_speedy,
 
 	int angle = rand();
 
-	speedx = 5;
+	speedx = 4;
 	//speedx = cosf(angle) * 1.5 * 6;
 	speedy = sinf(angle) * .75 * 6;
-	//return ball;
+	
 
 }

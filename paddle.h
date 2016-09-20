@@ -23,7 +23,7 @@ void pMovement(Player &p);
 //keeps player from getting off screen
 void heightClamp(Player &p);
 //drawing the box for the paddles
-void Draw(const Player& p);
+void Draw(Player& p);
 
 
 

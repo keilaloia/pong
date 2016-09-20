@@ -30,10 +30,10 @@
     <ClCompile Include="Splash.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Menu_M.cpp">
-      <Filter>Source Files\Resource Files</Filter>
-    </ClCompile>
     <ClCompile Include="Option.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Victory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,7 +56,7 @@
     <ClInclude Include="Option.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Power.h">
+    <ClInclude Include="Victory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

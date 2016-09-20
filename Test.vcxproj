@@ -127,10 +127,10 @@
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Menu_M.cpp" />
     <ClCompile Include="Option.cpp" />
     <ClCompile Include="paddle.cpp" />
     <ClCompile Include="Splash.cpp" />
+    <ClCompile Include="Victory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
@@ -138,7 +138,7 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="Option.h" />
     <ClInclude Include="paddle.h" />
-    <ClInclude Include="Power.h" />
+    <ClInclude Include="Victory.h" />
     <ClInclude Include="Splash.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
