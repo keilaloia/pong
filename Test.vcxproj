@@ -126,6 +126,7 @@
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="Instructions.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Option.cpp" />
     <ClCompile Include="paddle.cpp" />
@@ -136,6 +137,7 @@
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="Instructions.h" />
     <ClInclude Include="Option.h" />
     <ClInclude Include="paddle.h" />
     <ClInclude Include="Victory.h" />

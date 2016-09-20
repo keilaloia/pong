@@ -23,16 +23,16 @@ void Victory::draw()
 	if (P1score > P2score)
 	{
 		sprintf_s(buffer, "player 1 won with : %d points", P1score);
-		sfw::drawString(font, "would you like to play again?", 100, 120, 16, 16, 0, 0, select == 0 ? MAGENTA : WHITE);
-		sfw::drawString(font, "Nah im Gucci", 100, 100, 16, 16, 0, 0, select == 1 ? MAGENTA : WHITE);
+		sfw::drawString(font, "would you like to play again?", 120, 120, 16, 16, 0, 0, select == 0 ? MAGENTA : WHITE);
+		sfw::drawString(font, "Nah im Gucci", 120, 100, 16, 16, 0, 0, select == 1 ? MAGENTA : WHITE);
 
 		
 	}
 	else
 	{
 		sprintf_s(buffer, "player 2 won with : %d points", P2score);
-		sfw::drawString(font, "would you like to play again?", 100, 120, 16, 16, 0, 0, select == 0 ? MAGENTA : WHITE);
-		sfw::drawString(font, "Nah im Gucci", 100, 100, 16, 16, 0, 0, select == 1 ? MAGENTA : WHITE);
+		sfw::drawString(font, "would you like to play again?", 120, 120, 16, 16, 0, 0, select == 0 ? MAGENTA : WHITE);
+		sfw::drawString(font, "Nah im Gucci", 120, 100, 16, 16, 0, 0, select == 1 ? MAGENTA : WHITE);
 	
 
 	}

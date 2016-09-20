@@ -20,7 +20,7 @@ void Option::step()
 	timer -= sfw::getDeltaTime();
 	if (timer < 0)
 	{
-		timer = 1.f;
+		timer = 2.f;
 		select = 1 - select; //flips seletion between 0 and 1
 	}
 
@@ -31,7 +31,7 @@ APP_STATE Option::next()
 	if (sfw::getKey(KEY_ENTER))
 	{
 		if (select == 0)
-			return ENTER_GAME;
+			return ENTER_INSTRUCTIONS;
 		if (select == 1)
 			return ENTER_SPLASH;
 	}

@@ -20,9 +20,10 @@ void GameState::init()
 	p2.paddle(700, 45, 20, 50, KEY_UP, KEY_DOWN, MAGENTA);
 
 
-	for (int i = 0; i < 10; ++i)
+	for (int i = 0; i < 100; ++i)
 			balls[0].circle(300, 300, 5, 5, 20, RED);
 	ballCount = 1;
+	
 
 	p1.score = 0;
 	p2.score = 0;
@@ -35,12 +36,15 @@ void GameState::init()
 
 void GameState::drawRound()
 {
+	
+
 	// draws balls in the beginning of the round
-	for (int i = 0; i < ballCount && i < 10; ++i)
+	for (int i = 0; i < ballCount && i < 100; ++i)
 		if (balls[i].Aball)
 	{
 		prettyball(balls[i]);
-	
+		
+
 	}
 
 	Draw(p1);
@@ -55,25 +59,25 @@ void GameState::update()
 	//timer
 	timer -= sfw::getDeltaTime();
 
-	sprintf_s(buffer, "Craziness");
+	sprintf_s(buffer, "Stuff Happens");
 	sfw::drawString(d, buffer, 325, 575, 17, 17);
 	sprintf_s(buffer, "%f", timer);
 	sfw::drawString(d, buffer, 325, 550, 17, 17);
 	// draws balls every 10 seconds 
 	if (timer < 0)
 	{
+		++ballCount;
 		timer = 10.f;
 
-		ballCount++;
-		if(ballCount < 10)
-		balls[ballCount - 1].circle(400, balls[ballCount].y, rand() % 7 + 4, 5, rand() % 50 + 1, RED);
+		if(ballCount < 100 && ballCount >= 1)
+		balls[ballCount-1].circle(400, 300, rand() % 7 + 4, 5, rand() % 50 + 1, RED);
 
 		p1.paddle(p1.x, p1.y, rand() % 60 + 1, rand() % 200 + 10, KEY_UP, KEY_DOWN, MAGENTA);
 		p2.paddle(p2.x, p2.y, rand() % 60 + 1, rand() % 200 + 10, KEY_UP, KEY_DOWN, MAGENTA);
 	}
 
 	// collision code for draw balls 
-	for (int i = 0; i < ballCount && i < 10; ++i)
+	for (int i = 0; i < ballCount && i < 100; ++i)
 		if(balls[i].Aball)
 		{
 			collision(p1, balls[i]);
@@ -103,7 +107,7 @@ void GameState::Gscore()
 	sprintf_s(buffer, "player 2: %d", p2.score);
 	sfw::drawString(d, buffer, 525, 600, 17, 17);
 
-	for (int i = 0; i < ballCount && i < 10; ++i)
+	for (int i = 0; i < ballCount && i < 100; ++i)
 		if(balls[i].Aball)
 		{
 			if (balls[i].x < p1.x - 50)
